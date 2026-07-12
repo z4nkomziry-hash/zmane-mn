@@ -1,64 +1,36 @@
 {
     "name": "Zimanê Min - فێربوونا زمانان",
     "short_name": "Zimanê Min",
-    "description": "فێربوونا ١٠ زمانان ب تەکنیکێت جیاواز و ژیریا دەستکرد",
+    "description": "پلاتفۆرمێ فێربوونا ١٠ زمانێن جیهانی ب تەکنیکێت جیاواز و ژیریا دەستکرد (AI)",
+    "id": "/?source=pwa",
     "start_url": "/?source=pwa",
     "display": "standalone",
-    "display_override": ["standalone", "fullscreen", "minimal-ui"],
-    "background_color": "#7C3AED",
-    "theme_color": "#7C3AED",
-    "orientation": "any",
+    "background_color": "#0f172a",
+    "theme_color": "#6366f1",
+    "orientation": "portrait-primary",
     "lang": "ku",
     "dir": "rtl",
-    "categories": ["education", "languages", "productivity"],
-    "scope": "/",
-    "id": "zimanemin-pwa-v1",
-    "icons": [
-        { "src": "icons/icon-72.png", "sizes": "72x72", "type": "image/png" },
-        { "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png" },
-        { "src": "icons/icon-128.png", "sizes": "128x128", "type": "image/png" },
-        { "src": "icons/icon-144.png", "sizes": "144x144", "type": "image/png" },
-        { "src": "icons/icon-152.png", "sizes": "152x152", "type": "image/png" },
-        { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-        { "src": "icons/icon-384.png", "sizes": "384x384", "type": "image/png" },
-        { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
-    ],
+    "categories": ["education", "languages"],
     "shortcuts": [
         {
-            "name": "داشبۆرد",
-            "short_name": "داشبۆرد",
-            "description": "بڕۆ داشبۆرد",
-            "url": "/#dashboard",
-            "icons": [{ "src": "icons/shortcut-dashboard.png", "sizes": "96x96" }]
-        },
-        {
-            "name": "کورس",
-            "short_name": "کورس",
-            "description": "کورسێن زمانان",
-            "url": "/#courses",
-            "icons": [{ "src": "icons/shortcut-courses.png", "sizes": "96x96" }]
-        },
-        {
-            "name": "AI چات",
-            "short_name": "AI",
-            "description": "پراکتیزە دگەل AI",
-            "url": "/#ai-chat"
+            "name": "دەستپێکرنا وانەیان",
+            "short_name": "وانەکان",
+            "url": "/?action=start-lesson",
+            "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>", "sizes": "192x192"}]
         }
     ],
-    "screenshots": [
+    "icons": [
         {
-            "src": "screenshots/dashboard.png",
-            "sizes": "1280x720",
-            "type": "image/png",
-            "form_factor": "wide",
-            "label": "داشبۆرد"
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
         },
         {
-            "src": "screenshots/mobile-dashboard.png",
-            "sizes": "750x1334",
-            "type": "image/png",
-            "form_factor": "narrow",
-            "label": "داشبۆردا موبایل"
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
         }
     ]
 }
