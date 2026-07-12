@@ -14,15 +14,18 @@
         
         :root {
             --primary: #6366f1;
+            --primary-dark: #4f46e5;
             --dark: #1e293b;
+            --bg-main: #0f172a;
             --white: #ffffff;
             --gray: #64748b;
-            --radius: 10px;
+            --radius: 12px;
+            --border-glass: rgba(255, 255, 255, 0.08);
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--bg-main) 100%);
             min-height: 100vh;
             color: #e2e8f0;
             padding: 2rem;
@@ -37,607 +40,301 @@
         .admin-header {
             text-align: center;
             margin-bottom: 3rem;
+            position: relative;
         }
         
         .admin-header .logo {
             font-size: 3rem;
             margin-bottom: 0.5rem;
         }
-        
-        .admin-header h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
         }
         
-        .admin-header p {
-            color: #94a3b8;
-            font-size: 1.1rem;
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
         
         .card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
             padding: 2rem;
-            margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
-        .card-title {
-            font-size: 1.5rem;
+        .card h2 {
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: #e2e8f0;
-        }
-        
-        .card-title i {
             color: #818cf8;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-glass);
+            padding-bottom: 0.5rem;
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #cbd5e1;
+            color: #94a3b8;
             font-size: 0.95rem;
         }
         
-        .form-group select,
-        .form-group input {
+        select, input {
             width: 100%;
-            padding: 0.85rem 1.2rem;
+            padding: 0.75rem 1rem;
             background: #0f172a;
-            border: 1px solid #334155;
+            border: 2px solid #334155;
             border-radius: 8px;
-            color: #e2e8f0;
+            color: white;
             font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-            outline: none;
+            transition: 0.2s;
         }
         
-        .form-group select:focus,
-        .form-group input:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
         
         .btn {
-            padding: 1rem 2rem;
+            width: 100%;
+            padding: 0.85rem;
+            background: var(--primary);
+            color: white;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            font-family: inherit;
-            transition: all 0.3s;
-            display: inline-flex;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .stats-box {
+            display: flex;
+            justify-content: space-around;
             align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
-            color: white;
-            width: 100%;
-            justify-content: center;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #4f46e5, #3730a3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
-        }
-        
-        .btn-secondary {
-            background: #334155;
-            color: #e2e8f0;
-            width: 100%;
-            justify-content: center;
-            margin-top: 0.5rem;
-        }
-        
-        .btn-secondary:hover {
-            background: #475569;
-        }
-        
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-            width: 100%;
-            justify-content: center;
-            margin-top: 0.5rem;
-        }
-        
-        .btn-danger:hover {
-            background: #dc2626;
-        }
-        
-        /* ناوچا کلیکان */
-        .keys-display {
-            background: #0f172a;
+            text-align: center;
+            background: #1e293b;
+            padding: 1rem;
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #334155;
+            margin-bottom: 1rem;
         }
         
-        .keys-display h3 {
-            color: #818cf8;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+        .stat-item h3 { font-size: 1.8rem; color: #f59e0b; }
+        .stat-item p { font-size: 0.85rem; color: #94a3b8; }
+        
+        .key-list-box {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid var(--border-glass);
+            border-radius: 6px;
+            background: #0f172a;
         }
         
         .key-item {
-            background: #1e293b;
-            padding: 1rem;
-            margin: 0.75rem 0;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            color: #34d399;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid #818cf8;
-            transition: all 0.3s;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-glass);
+            font-family: monospace;
+            font-size: 0.95rem;
         }
         
-        .key-item:hover {
-            background: #334155;
-            border-left-color: #34d399;
-        }
+        .key-item:last-child { border-bottom: none; }
+        .badge { padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .badge-premium { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .badge-family { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .badge-lifetime { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
         
-        .key-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .key-actions button {
-            background: #334155;
-            border: none;
-            color: #e2e8f0;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        
-        .key-actions button:hover {
-            background: #475569;
-        }
-        
-        .key-actions .copy-btn:hover {
-            background: #6366f1;
-        }
-        
-        .key-actions .delete-btn:hover {
-            background: #ef4444;
-        }
-        
-        /* ستاتیک */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .stat-card {
-            background: #0f172a;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #334155;
-        }
-        
-        .stat-card h3 {
-            font-size: 2.5rem;
-            color: #818cf8;
-            margin-bottom: 0.25rem;
-        }
-        
-        .stat-card p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-        
-        /* نۆتیفیکەیشن */
         .notification {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #34d399;
-            color: #0f172a;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            z-index: 9999;
-            animation: slideDown 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .notification.error {
-            background: #ef4444;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: #10b981;
             color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+            font-weight: 600;
         }
-        
-        @keyframes slideDown {
-            from { transform: translate(-50%, -100px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-        
-        /* ریسپانسیڤ */
-        @media (max-width: 600px) {
-            body { padding: 1rem; }
-            .admin-header h1 { font-size: 1.8rem; }
-            .card { padding: 1.5rem; }
-            .key-item { font-size: 0.9rem; flex-direction: column; gap: 0.5rem; }
-        }
+        .notification.error { background: #ef4444; }
     </style>
 </head>
 <body>
+
+    <script>
+        function checkAdminAuth() {
+            const token = sessionStorage.getItem('admin_auth_token');
+            if (!token || !token.startsWith('token_')) {
+                alert('🛑 لێبوورین! تو نەشێی بێ چوونەژوور بێییە ڤی لاپەڕەی.');
+                window.location.href = 'login.html';
+            }
+        }
+        checkAdminAuth();
+    </script>
+
     <div class="admin-container">
-        <!-- هێدەر -->
         <div class="admin-header">
+            <button class="logout-btn" onclick="adminLogout()">🚪 لۆگۆت</button>
             <div class="logo">🔐</div>
-            <h1>Zimanê Min - پانێلا ئادمین</h1>
-            <p>درۆستکرن و بەرێوەبرنا کودێن لایسنس و ئەکتیڤکرنێ</p>
+            <h1>ڕێکخستن و دروستکرنا کلیلان</h1>
+            <p>ل ڤێرێ دشێی کلیلێن نوو یێن چالاککرنێ دروست بکەی و کۆنترۆل بکەی</p>
         </div>
         
-        <!-- کاردی دروستکرنا کودان -->
-        <div class="card">
-            <div class="card-title">
-                <i>🔑</i> دروستکرنا کودێن نوی
-            </div>
-            
-            <div class="form-row">
+        <div class="grid-layout">
+            <div class="card">
+                <h2>🔑 دروستکرنا کلیلەکا نوو</h2>
                 <div class="form-group">
-                    <label>📦 جۆرێ پاکێجێ:</label>
+                    <label>جۆرێ پاکێجێ</label>
                     <select id="packageType">
-                        <option value="premium">💎 پرێمیۆم - $9.99/مانگ</option>
-                        <option value="family">👨‍👩‍👧‍👦 خێزان - $19.99/مانگ</option>
-                        <option value="lifetime">♾️ هەروهەر - $149.99</option>
+                        <option value="premium">💎 پرێمیۆم (Premium)</option>
+                        <option value="family">👨‍👩‍👧‍👦 خێزان (Family)</option>
+                        <option value="lifetime">♾️ هەروهەر (Lifetime)</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
-                    <label>⏳ دەمێ بەردەوامبوونێ:</label>
+                    <label>ماوێ بەردەوامبوونێ (ب مانگان)</label>
                     <select id="duration">
                         <option value="1">١ مانگ</option>
                         <option value="3">٣ مانگ</option>
                         <option value="6">٦ مانگ</option>
-                        <option value="12">١٢ مانگ (١ سال)</option>
-                        <option value="lifetime">هەروهەر ♾️</option>
+                        <option value="12">١٢ مانگ (١ ساڵ)</option>
+                        <option value="lifetime">♾️ هەمیشەیی</option>
                     </select>
                 </div>
+                <button class="btn" onclick="generateNewKey()">➕ دروستکە</button>
+            </div>
+            
+            <div class="card">
+                <h2>📊 دۆخێ گشتی یێ کلیلان</h2>
+                <div class="stats-box">
+                    <div class="stat-item">
+                        <h3 id="totalKeysCount">0</h3>
+                        <p>تەڤایا کلیلان</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="unusedKeysCount" style="color: #10b981;">0</h3>
+                        <p>کلیلێن ماین</p>
+                    </div>
+                </div>
                 
-                <div class="form-group">
-                    <label>🔢 چەند کود:</label>
-                    <input type="number" id="keyCount" value="5" min="1" max="500">
-                </div>
+                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #94a3b8;">📋 دوایین کلیلێن دروستکری:</h3>
+                <div class="key-list-box" id="keyList">
+                    </div>
             </div>
-            
-            <button class="btn btn-primary" onclick="generateKeys()">
-                🔑 دروستکرنا کودان
-            </button>
-            
-            <div class="keys-display" id="keysDisplay">
-                <p style="color:#94a3b8; text-align:center;">👆 کودێن نوی دێ ل ڤێرێ دەرکەڤن...</p>
-            </div>
-            
-            <button class="btn btn-secondary" onclick="exportAllKeys()" id="exportBtn" style="display:none;">
-                📋 هەمی کودان کۆپی بکە
-            </button>
-            <button class="btn btn-danger" onclick="clearKeys()" id="clearBtn" style="display:none;">
-                🗑️ هەمیان ژێبە
-            </button>
-        </div>
-        
-        <!-- کاردی ستاتیکا کودان -->
-        <div class="card">
-            <div class="card-title">
-                <i>📊</i> ستاتیکا کودێن هاتینە دروستکرن
-            </div>
-            
-            <div class="stats-grid" id="statsGrid">
-                <div class="stat-card">
-                    <h3 id="totalKeys">0</h3>
-                    <p>هەمی کود</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="activeKeys">0</h3>
-                    <p>چالاک</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="usedKeys">0</h3>
-                    <p>هاتینە بکارئینان</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="availableKeys">0</h3>
-                    <p>بەردەست</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- کاردی بەرێوەبرنا پارەدانان -->
-        <div class="card">
-            <div class="card-title">
-                <i>💰</i> پارەدانێن هاتینە کرن
-            </div>
-            
-            <div id="paymentsList">
-                <p style="color:#94a3b8; text-align:center;">پارەدانێن چاڤەرێ دێ ل ڤێرێ دەرکەڤن...</p>
-            </div>
-            
-            <button class="btn btn-secondary" onclick="loadPendingPayments()">
-                🔄 نویکرنا پارەدانان
-            </button>
         </div>
     </div>
-    
-    <!-- نۆتیفیکەیشن -->
-    <div id="notification" style="display:none;"></div>
+
+    <div id="notification" class="notification"></div>
 
     <script>
-        // ========================================
-        // سیستەمێ دروستکرنا و بەرێوەبرنا کودان
-        // ========================================
-        
-        // ئۆبژێکتێن هاتینە پاراستن
-        let currentKeys = [];
-        let allLicenses = [];
-        
-        // --- فەنکشنێن سەرەکی ---
-        
-        // دروستکرنا کودان
-        function generateKeys() {
-            const packageType = document.getElementById('packageType').value;
-            const duration = document.getElementById('duration').value;
-            const count = parseInt(document.getElementById('keyCount').value);
+        // لۆگۆتکرن و ژێبرنا سێشنێ
+        function adminLogout() {
+            sessionStorage.removeItem('admin_auth_token');
+            window.location.href = 'login.html';
+        }
+
+        // وەرگرتنی گشتی لایسنسان ژ لۆکاڵ ستۆریج
+        function getAllLicenses() {
+            return JSON.parse(localStorage.getItem('licenses') || '[]');
+        }
+
+        // بارکرن و پیشاندانا کلیلان ل سەر شاشێ
+        function loadAdminDashboard() {
+            const licenses = getAllLicenses();
+            const keyList = document.getElementById('keyList');
             
-            if (!count || count < 1 || count > 500) {
-                showNotification('تکایە ژمارەیەکا دروست تێکەڤە (١-٥٠٠)', 'error');
+            document.getElementById('totalKeysCount').textContent = licenses.length;
+            
+            const unused = licenses.filter(l => !l.activated);
+            document.getElementById('unusedKeysCount').textContent = unused.length;
+            
+            // ئەگەر کلیل نەبن
+            if (licenses.length === 0) {
+                keyList.innerHTML = '<div style="padding:1rem; text-align:center; color:#64748b;">چ کلیل نینن</div>';
                 return;
             }
             
-            currentKeys = [];
-            const prefix = 'ZM';
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            
-            for (let i = 0; i < count; i++) {
-                let key = '';
-                for (let j = 0; j < 16; j++) {
-                    key += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                
-                const segmented = key.match(/.{1,4}/g).join('-');
-                const fullKey = `${prefix}-${segmented}`;
-                
-                const licenseData = {
-                    key: fullKey,
-                    package: packageType,
-                    duration: duration,
-                    created: new Date().toISOString(),
-                    activated: false,
-                    activatedBy: null,
-                    activatedAt: null,
-                    valid: true
-                };
-                
-                currentKeys.push(licenseData);
-            }
-            
-            // تومارکرن د localStorage-ێدا
-            saveAllLicenses(currentKeys);
-            displayKeys(currentKeys);
-            updateStats();
-            
-            showNotification(`✅ ${count} کود ب سەرکەفتیانە هاتنە دروستکرن!`);
-        }
-        
-        // تومارکرنا کودان د localStorage-ێدا
-        function saveAllLicenses(newLicenses) {
-            const existingLicenses = JSON.parse(localStorage.getItem('adminLicenses') || '[]');
-            const updatedLicenses = [...existingLicenses, ...newLicenses];
-            localStorage.setItem('adminLicenses', JSON.stringify(updatedLicenses));
-            allLicenses = updatedLicenses;
-        }
-        
-        // وەرگرتنا هەمی کودان
-        function loadAllLicenses() {
-            allLicenses = JSON.parse(localStorage.getItem('adminLicenses') || '[]');
-            updateStats();
-        }
-        
-        // نیشاندانا کودان
-        function displayKeys(keys) {
-            const display = document.getElementById('keysDisplay');
-            
-            if (keys.length === 0) {
-                display.innerHTML = '<p style="color:#94a3b8; text-align:center;">👆 کودێن نوی دێ ل ڤێرێ دەرکەڤن...</p>';
-                document.getElementById('exportBtn').style.display = 'none';
-                document.getElementById('clearBtn').style.display = 'none';
-                return;
-            }
-            
-            let html = `<h3>🔑 ${keys.length} کودێن نوی:</h3>`;
-            
-            keys.forEach((license, index) => {
-                html += `
-                    <div class="key-item">
-                        <span>${license.key}</span>
-                        <span style="color:#94a3b8; font-size:0.85rem;">
-                            ${getPackageEmoji(license.package)} ${getPackageName(license.package)} | 
-                            ${getDurationName(license.duration)}
-                        </span>
-                        <div class="key-actions">
-                            <button class="copy-btn" onclick="copySingleKey('${license.key}')">📋 کۆپی</button>
-                            <button class="delete-btn" onclick="deleteKey(${index})">🗑️</button>
-                        </div>
+            // نیشاندانا کلیلان (ژ نوو بۆ کۆن)
+            keyList.innerHTML = licenses.reverse().map(l => `
+                <div class="key-item">
+                    <div>
+                        <span class="badge badge-${l.package}">${getPackageEmoji(l.package)} ${getPackageName(l.package)}</span>
+                        <strong style="margin-right: 8px; color: #fff;">${l.key}</strong>
                     </div>
-                `;
-            });
+                    <span style="font-size:0.8rem; color:${l.activated ? '#ef4444' : '#10b981'}">
+                        ${l.activated ? '🔴 بەکارهاتیە' : '🟢 چالاك'}
+                    </span>
+                </div>
+            `).join('');
+        }
+
+        // دروستکرنا کلیلا داینامیکی نوو
+        function generateNewKey() {
+            const packageType = document.getElementById('packageType').value;
+            let duration = document.getElementById('duration').value;
             
-            display.innerHTML = html;
-            document.getElementById('exportBtn').style.display = 'block';
-            document.getElementById('clearBtn').style.display = 'block';
-        }
-        
-        // کۆپیکرنا تەککە کودەکی
-        function copySingleKey(key) {
-            navigator.clipboard.writeText(key).then(() => {
-                showNotification('📋 کود هاتە کۆپیکرن!');
-            });
-        }
-        
-        // ژێبرنا کودەکی
-        function deleteKey(index) {
-            currentKeys.splice(index, 1);
-            displayKeys(currentKeys);
-            updateStats();
-        }
-        
-        // ئێکسپۆرتکرنا هەمیان
-        function exportAllKeys() {
-            if (currentKeys.length === 0) {
-                showNotification('⚠️ چ کود نینن بو کۆپیکرنێ!', 'error');
-                return;
+            if (packageType === 'lifetime') {
+                duration = 'lifetime';
             }
             
-            const keysList = currentKeys.map(k => k.key).join('\n');
-            navigator.clipboard.writeText(keysList).then(() => {
-                showNotification('✅ هەمی کود هاتنە کۆپیکرن!');
-            });
-        }
-        
-        // ژێبرنا هەمی کودێن نیشاندایی
-        function clearKeys() {
-            if (confirm('ئەرێ تە دڤێت هەمی کودێن نیشاندایی ژێبەی؟')) {
-                currentKeys = [];
-                displayKeys([]);
-                updateStats();
-            }
-        }
-        
-        // نویکرنا ستاتیکان
-        function updateStats() {
-            const allLicenses = JSON.parse(localStorage.getItem('adminLicenses') || '[]');
-            const total = allLicenses.length;
-            const used = allLicenses.filter(l => l.activated).length;
-            const available = allLicenses.filter(l => !l.activated && l.valid).length;
-            
-            document.getElementById('totalKeys').textContent = total;
-            document.getElementById('usedKeys').textContent = used;
-            document.getElementById('availableKeys').textContent = available;
-            document.getElementById('activeKeys').textContent = total;
-        }
-        
-        // --- پارەدان ---
-        function loadPendingPayments() {
-            const payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            const pendingPayments = payments.filter(p => p.status === 'pending');
-            
-            const display = document.getElementById('paymentsList');
-            
-            if (pendingPayments.length === 0) {
-                display.innerHTML = '<p style="color:#94a3b8; text-align:center;">✅ چ پارەدانەکا چاڤەرێ نینە</p>';
-                return;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let keyRandom = '';
+            for (let i = 0; i < 16; i++) {
+                keyRandom += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             
-            let html = '<div style="overflow-x: auto;"><table style="width:100%; border-collapse:collapse;">';
-            html += '<tr style="border-bottom:2px solid #334155;">';
-            html += '<th style="padding:0.75rem; text-align:right;">ناڤ</th>';
-            html += '<th style="padding:0.75rem; text-align:right;">پاکێج</th>';
-            html += '<th style="padding:0.75rem; text-align:right;">رێک</th>';
-            html += '<th style="padding:0.75rem; text-align:right;">دەم</th>';
-            html += '<th style="padding:0.75rem; text-align:right;">ئەکسیۆن</th>';
-            html += '</tr>';
+            // پارچەکرن چوار چوار
+            const parts = keyRandom.match(/.{1,4}/g);
+            const fullKey = `ZM-${parts.join('-')}`;
             
-            pendingPayments.forEach(payment => {
-                html += `
-                    <tr style="border-bottom:1px solid #334155;">
-                        <td style="padding:0.75rem;">${payment.userName}</td>
-                        <td style="padding:0.75rem;">${getPackageName(payment.package)}</td>
-                        <td style="padding:0.75rem;">${payment.method}</td>
-                        <td style="padding:0.75rem; font-size:0.85rem;">${new Date(payment.timestamp).toLocaleString('ckb')}</td>
-                        <td style="padding:0.75rem;">
-                            <button onclick="approvePayment('${payment.id}')" style="background:#10b981; color:white; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer; margin-left:0.25rem;">✅ قبول</button>
-                            <button onclick="rejectPayment('${payment.id}')" style="background:#ef4444; color:white; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer;">❌ رەد</button>
-                        </td>
-                    </tr>
-                `;
-            });
+            const newLicense = {
+                key: fullKey,
+                package: packageType,
+                duration: duration,
+                created: new Date().toISOString(),
+                activated: false,
+                activatedBy: null,
+                activatedAt: null
+            };
             
-            html += '</table></div>';
-            display.innerHTML = html;
+            const licenses = getAllLicenses();
+            licenses.push(newLicense);
+            localStorage.setItem('licenses', JSON.stringify(licenses));
+            
+            showNotification(`✅ کلیل ب سەرکەفتیانە هاتە دروستکرن: ${fullKey}`);
+            loadAdminDashboard();
         }
-        
-        function approvePayment(paymentId) {
-            const payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            const payment = payments.find(p => p.id === paymentId);
-            
-            if (payment) {
-                payment.status = 'approved';
-                localStorage.setItem('payments', JSON.stringify(payments));
-                
-                // ئەکتیڤکرنا پاکێجێ
-                upgradeUserPackage(payment.userId, payment.package, '1');
-                
-                showNotification('✅ پارەدان هاتە قبولکرن و پاکێج ئەکتیڤ بوو!');
-                loadPendingPayments();
-            }
-        }
-        
-        function rejectPayment(paymentId) {
-            const payments = JSON.parse(localStorage.getItem('payments') || '[]');
-            const payment = payments.find(p => p.id === paymentId);
-            
-            if (payment) {
-                payment.status = 'rejected';
-                localStorage.setItem('payments', JSON.stringify(payments));
-                showNotification('❌ پارەدان هاتە رەدکرن.', 'error');
-                loadPendingPayments();
-            }
-        }
-        
-        function upgradeUserPackage(userId, packageType, duration) {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.id === userId);
-            
-            if (userIndex !== -1) {
-                const expiryDate = duration === 'lifetime' 
-                    ? '2099-12-31' 
-                    : new Date(new Date().setMonth(new Date().getMonth() + parseInt(duration))).toISOString();
-                
-                users[userIndex].package = packageType;
-                users[userIndex].isPremium = true;
-                users[userIndex].packageExpiry = expiryDate;
-                localStorage.setItem('users', JSON.stringify(users));
-            }
-        }
-        
-        // --- فەنکشنێن هاریکاری ---
+
+        // فەنکشنێن ئیمۆجی و ناڤان
         function getPackageEmoji(type) {
             const emojis = { premium: '💎', family: '👨‍👩‍👧‍👦', lifetime: '♾️' };
             return emojis[type] || '📦';
@@ -647,33 +344,17 @@
             const names = { premium: 'پرێمیۆم', family: 'خێزان', lifetime: 'هەروهەر' };
             return names[type] || type;
         }
-        
-        function getDurationName(duration) {
-            if (duration === 'lifetime') return 'هەروهەر';
-            return `${duration} مانگ`;
+
+        function showNotification(message, isError = false) {
+            const el = document.getElementById('notification');
+            el.textContent = message;
+            if (isError) el.classList.add('error'); else el.classList.remove('error');
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 4000);
         }
-        
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = 'notification ' + (type === 'error' ? 'error' : '');
-            notification.style.display = 'block';
-            
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-        
-        // --- دەستپێک (Initialization) ---
-        window.addEventListener('load', () => {
-            loadAllLicenses();
-            loadPendingPayments();
-            console.log('🔐 پانێلا ئادمین یا ئامادەیە!');
-            console.log('💡 بو دروستکرنا کودان: جۆرێ پاکێجێ و دەمێ و ژمارا کلیتان هەلبژێرە');
-        });
-        
-        // نویکرنا ستاتیکان هەر ١٠ چرکەکان
-        setInterval(updateStats, 10000);
+
+        // ڕاکێشانا داتایان ل دەمێ بارکرنا سایتێ
+        window.addEventListener('load', loadAdminDashboard);
     </script>
 </body>
 </html>
