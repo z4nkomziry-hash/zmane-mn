@@ -1,0 +1,238 @@
+/* ============================================
+   ZIMANÊ MIN - Design System v5.0
+   Complete Design Tokens & CSS Variables
+   ============================================ */
+
+:root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Primary - Purple */
+    --color-primary-50: #F5F3FF;
+    --color-primary-100: #EDE9FE;
+    --color-primary-200: #DDD6FE;
+    --color-primary-300: #C4B5FD;
+    --color-primary-400: #A78BFA;
+    --color-primary-500: #8B5CF6;
+    --color-primary-600: #7C3AED;
+    --color-primary-700: #6D28D9;
+    --color-primary-800: #5B21B6;
+    --color-primary-900: #4C1D95;
+    
+    /* Secondary - Emerald */
+    --color-secondary-50: #ECFDF5;
+    --color-secondary-100: #D1FAE5;
+    --color-secondary-200: #A7F3D0;
+    --color-secondary-300: #6EE7B7;
+    --color-secondary-400: #34D399;
+    --color-secondary-500: #10B981;
+    --color-secondary-600: #059669;
+    --color-secondary-700: #047857;
+    --color-secondary-800: #065F46;
+    --color-secondary-900: #064E3B;
+    
+    /* Neutral - Slate */
+    --color-neutral-50: #F8FAFC;
+    --color-neutral-100: #F1F5F9;
+    --color-neutral-200: #E2E8F0;
+    --color-neutral-300: #CBD5E1;
+    --color-neutral-400: #94A3B8;
+    --color-neutral-500: #64748B;
+    --color-neutral-600: #475569;
+    --color-neutral-700: #334155;
+    --color-neutral-800: #1E293B;
+    --color-neutral-900: #0F172A;
+    
+    /* Accent Colors */
+    --color-accent-rose: #F43F5E;
+    --color-accent-amber: #F59E0B;
+    --color-accent-sky: #0EA5E9;
+    --color-accent-indigo: #6366F1;
+    
+    /* Semantic Colors */
+    --color-success: var(--color-secondary-500);
+    --color-success-bg: var(--color-secondary-50);
+    --color-success-text: var(--color-secondary-700);
+    
+    --color-warning: var(--color-accent-amber);
+    --color-warning-bg: #FFFBEB;
+    --color-warning-text: #92400E;
+    
+    --color-error: #EF4444;
+    --color-error-bg: #FEF2F2;
+    --color-error-text: #991B1B;
+    
+    --color-info: var(--color-accent-sky);
+    --color-info-bg: #F0F9FF;
+    --color-info-text: #075985;
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-family-base: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    --font-family-heading: 'Cairo', sans-serif;
+    --font-family-mono: 'Fira Code', 'Courier New', monospace;
+    
+    /* Font Sizes (Major Third Scale) */
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.875rem;    /* 14px */
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-3xl: 1.875rem;   /* 30px */
+    --text-4xl: 2.25rem;    /* 36px */
+    --text-5xl: 3rem;       /* 48px */
+    
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    
+    /* ========== SPACING ========== */
+    --space-0: 0;
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+    --space-16: 4rem;     /* 64px */
+    --space-20: 5rem;     /* 80px */
+    
+    /* ========== BORDER RADIUS ========== */
+    --radius-none: 0;
+    --radius-xs: 0.25rem;     /* 4px */
+    --radius-sm: 0.5rem;      /* 8px */
+    --radius-md: 0.75rem;     /* 12px */
+    --radius-lg: 1rem;        /* 16px */
+    --radius-xl: 1.5rem;      /* 24px */
+    --radius-2xl: 2rem;       /* 32px */
+    --radius-full: 9999px;
+    
+    /* ========== SHADOWS ========== */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    
+    /* ========== TRANSITIONS ========== */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* ========== Z-INDEX ========== */
+    --z-0: 0;
+    --z-10: 10;
+    --z-20: 20;
+    --z-30: 30;
+    --z-40: 40;
+    --z-50: 50;
+    --z-auto: auto;
+    
+    /* ========== LAYOUT ========== */
+    --container-max: 1280px;
+    --container-padding: 1.5rem;
+    --header-height: 64px;
+    
+    /* ========== APPLICATION ========== */
+    --color-bg: var(--color-neutral-50);
+    --color-surface: #FFFFFF;
+    --color-text: var(--color-neutral-900);
+    --color-text-secondary: var(--color-neutral-500);
+    --color-border: var(--color-neutral-200);
+    --color-primary: var(--color-primary-600);
+    --color-primary-hover: var(--color-primary-700);
+    --color-primary-text: #FFFFFF;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: var(--color-neutral-900);
+        --color-surface: var(--color-neutral-800);
+        --color-text: var(--color-neutral-50);
+        --color-text-secondary: var(--color-neutral-400);
+        --color-border: var(--color-neutral-700);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========== RESET ========== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    background: var(--color-bg);
+    direction: rtl;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== UTILITY CLASSES ========== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ========== FOCUS STYLES ========== */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+
+/* ========== SELECTION ========== */
+::selection {
+    background: var(--color-primary-200);
+    color: var(--color-primary-900);
+}
