@@ -209,14 +209,8 @@ html {
 }
 
 body {
-    font-family: var(--font-body);
-    line-height: 1.8;
-    color: var(--dark);
-    background: var(--light);
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
     direction: rtl;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
