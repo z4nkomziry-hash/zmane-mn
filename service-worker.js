@@ -1,158 +1,69 @@
-// service-worker.js - Advanced Caching Strategies
-const CACHE_VERSION = 'v3';
-const CACHE_NAME = `zimanemin-${CACHE_VERSION}`;
-const RUNTIME_CACHE = `zimanemin-runtime-${CACHE_VERSION}`;
+// service-worker.js - ئاپدێتکری بۆ ساڵا 2026 (خێراتر و جێگیرتر)
+const CACHE_NAME = 'zimanemin-v3';
 
-// Resources to pre-cache
-const PRECACHE_URLS = [
+// تەنێ ئەو فایلێن بەردەست و سەرەکی یێن تە فرێکرین مە هێلاینە دا سێرڤیس وۆرکەر نەوەستیت
+const urlsToCache = [
     '/',
     '/index.html',
-    '/styles/main.css',
-    '/scripts/config.js',
-    '/scripts/app.js',
     '/manifest.json',
-    '/offline.html'
+    '/scripts/config.js',
+    '/scripts/auth.js',
+    '/scripts/courses.js',
+    '/scripts/gamification.js',
+    '/scripts/lesson-page.js',
+    '/scripts/partners.js',
+    '/scripts/backup.js',
+    '/scripts/reports.js',
+    '/scripts/exports.js',
+    '/license.js'
 ];
 
-// Install - Pre-cache critical resources
+// ئینستاڵکرن و پاشکەوتکرنا فایلان
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Pre-caching resources...');
-                return cache.addAll(PRECACHE_URLS);
+                console.log('✅ کەش ب سەرکەفتیانە هاتە ئامادەکرن');
+                return cache.addAll(urlsToCache);
             })
-            .then(() => self.skipWaiting())
+            .then(() => self.skipWaiting()) // ئێکسەر سێرڤیس وۆرکەرا نوو چالاك دکەت
     );
 });
 
-// Activate - Clean old caches
+// ئەکتیڤکرن و پاقژکرنا کەشێن کۆن
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
-                cacheNames.filter(name => {
-                    return name !== CACHE_NAME && name !== RUNTIME_CACHE;
-                }).map(name => caches.delete(name))
+                cacheNames.map(cache => {
+                    if (cache !== CACHE_NAME) {
+                        console.log('🧹 ژێبرنا کەشا کۆن:', cache);
+                        return caches.delete(cache);
+                    }
+                })
             );
         }).then(() => self.clients.claim())
     );
 });
 
-// Fetch - Advanced strategies
+// ستراتیجیا Stale-While-Revalidate بۆ خێراییەکا ئیکستریم
 self.addEventListener('fetch', event => {
-    const { request } = event;
-    const url = new URL(request.url);
-    
-    // API calls - Network First
-    if (url.pathname.startsWith('/api/')) {
-        event.respondWith(networkFirst(request));
-        return;
-    }
-    
-    // Images - Cache First
-    if (request.destination === 'image') {
-        event.respondWith(cacheFirst(request));
-        return;
-    }
-    
-    // Fonts & CSS - Cache First
-    if (request.destination === 'font' || request.destination === 'style') {
-        event.respondWith(cacheFirst(request));
-        return;
-    }
-    
-    // HTML & JS - Stale While Revalidate
-    event.respondWith(staleWhileRevalidate(request));
-});
+    // تەنێ داخوازیێن لۆکاڵ کەش بکە (نەک هی دەرڤە وەک ئەنیمەیشن یان فۆنتان)
+    if (!event.request.url.startsWith(self.location.origin)) return;
 
-// Cache First Strategy
-async function cacheFirst(request) {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-    
-    try {
-        const response = await fetch(request);
-        const cache = await caches.open(RUNTIME_CACHE);
-        cache.put(request, response.clone());
-        return response;
-    } catch (error) {
-        return new Response('Offline', { status: 503 });
-    }
-}
+    event.respondWith(
+        caches.match(event.request).then(cachedResponse => {
+            const fetchPromise = fetch(event.request).then(networkResponse => {
+                if (networkResponse && networkResponse.status === 200) {
+                    const cacheCopy = networkResponse.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, cacheCopy));
+                }
+                return networkResponse;
+            }).catch(() => {
+                // ئەگەر ئینتەرنێت نەبوو، کێشە نینە ل سەر کەشێ دێ کار کەت
+            });
 
-// Network First Strategy
-async function networkFirst(request) {
-    try {
-        const response = await fetch(request);
-        const cache = await caches.open(RUNTIME_CACHE);
-        cache.put(request, response.clone());
-        return response;
-    } catch (error) {
-        const cached = await caches.match(request);
-        return cached || new Response(JSON.stringify({ error: 'Offline' }), {
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
-}
-
-// Stale While Revalidate Strategy
-async function staleWhileRevalidate(request) {
-    const cache = await caches.open(RUNTIME_CACHE);
-    const cached = await cache.match(request);
-    
-    const fetchPromise = fetch(request).then(response => {
-        cache.put(request, response.clone());
-        return response;
-    }).catch(() => cached);
-    
-    return cached || fetchPromise;
-}
-
-// Push Notification
-self.addEventListener('push', event => {
-    const data = event.data ? event.data.json() : {};
-    const options = {
-        body: data.body || 'وەرە بو فێربوونێ!',
-        icon: '/icons/icon-192.png',
-        badge: '/icons/badge.png',
-        vibrate: [200, 100, 200],
-        data: { url: data.url || '/' },
-        actions: [
-            { action: 'open', title: 'ڤەکە' },
-            { action: 'close', title: 'داخە' }
-        ]
-    };
-    
-    event.waitUntil(
-        self.registration.showNotification(
-            data.title || 'Zimanê Min',
-            options
-        )
+            return cachedResponse || fetchPromise;
+        })
     );
 });
-
-// Notification Click
-self.addEventListener('notificationclick', event => {
-    event.notification.close();
-    if (event.action === 'open') {
-        event.waitUntil(
-            clients.openWindow(event.notification.data.url || '/')
-        );
-    }
-});
-
-// Background Sync
-self.addEventListener('sync', event => {
-    if (event.tag === 'sync-progress') {
-        event.waitUntil(syncProgress());
-    }
-});
-
-async function syncProgress() {
-    // Sync user progress when back online
-    const cache = await caches.open(RUNTIME_CACHE);
-    const pendingRequests = await cache.match('/api/sync-queue');
-    // Process pending sync requests...
-    console.log('Background sync completed');
-}
