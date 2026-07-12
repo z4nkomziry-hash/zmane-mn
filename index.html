@@ -3,223 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zimanê Min - فێربوونا زمانان ب AI</title>
+    <title>Zimanê Min | پلاتفۆرمێ فێربوونا زمانان</title>
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Zimanê Min - فێربوونا ١٠ زمانان ب تەکنیکێت جیاواز و ژیریا دەستکرد. کوردی بەهدینی و کوردی سۆرانی تێدا.">
-    <meta name="keywords" content="فێربوونا زمانان, کوردی, AI, ژیریا دەستکرد, فلاش کارت, فێربوون, زمان">
-    <meta name="author" content="Zimanê Min">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#7C3AED">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zimanemin.com">
-    <meta property="og:title" content="Zimanê Min - فێربوونا زمانان ب AI">
-    <meta property="og:description" content="فێربوونا ١٠ زمانان ب تەکنیکێت جیاواز و ژیریا دەستکرد">
-    <meta property="og:image" content="https://zimanemin.com/og-image.png">
-    <meta property="og:locale" content="ku">
-    <meta property="og:site_name" content="Zimanê Min">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://zimanemin.com">
-    <meta name="twitter:title" content="Zimanê Min - فێربوونا زمانان ب AI">
-    <meta name="twitter:description" content="فێربوونا ١٠ زمانان ب تەکنیکێت جیاواز و ژیریا دەستکرد">
-    <meta name="twitter:image" content="https://zimanemin.com/og-image.png">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Zimanê Min">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="/manifest.json">
     
-    <!-- Security Headers (via meta) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:;">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- فۆنت و ئایکۆن هۆست ل سەر CDN یێن خێرا -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <!-- Skeleton Loading Screen -->
-    <div id="loadingScreen" class="loading-screen" role="status" aria-label="بارکرن">
-        <div class="skeleton-loader">
-            <div class="skeleton-header"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
+
+    <!-- لۆدینگ سکرین (Loading Screen) -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader">
+            <i class="fas fa-globe-americas"></i>
+            <p>Zimanê Min بار دبیت...</p>
         </div>
     </div>
-    
-    <!-- Offline Banner (شارەوە بەرچاڤ نابیت هەتا ئۆفلاین نەبیت) -->
-    <div id="offlineBanner" class="offline-banner" role="alert" style="display:none;" aria-live="polite">
-        <i class="fas fa-wifi" aria-hidden="true"></i>
-        <span>تۆ ئێستا ئۆفلاین ی. هندەک تایبەتمەندی دشێن کارنەکەن.</span>
-    </div>
-    
-    <!-- Update Prompt -->
-    <div id="updatePrompt" class="update-prompt" role="dialog" aria-labelledby="updateTitle" style="display:none;">
-        <p id="updateTitle">وەشانەکا نوی یا بەردەستە!</p>
-        <button onclick="updateApp()" class="btn btn-primary btn-sm">نوی بکە</button>
-    </div>
-    
-    <!-- Toast Container -->
-    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-    
-    <!-- Error Boundary -->
-    <div id="errorBoundary" class="error-boundary" style="display:none;" role="alert">
-        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-        <h2>تکایە دووبارە هەوڵبدە</h2>
-        <p>هەڵەیەک ڕویدا</p>
-        <button onclick="location.reload()" class="btn btn-primary">دووبارە بارکردنەوە</button>
-    </div>
 
-    <!-- ==================== HEADER ==================== -->
-    <header class="main-header" role="banner">
+    <!-- ناڤباڕ و هێدەرێ سەرەکی -->
+    <header class="main-header">
         <div class="container">
-            <div class="logo" onclick="window.location.href='#'" role="link" tabindex="0" aria-label="Zimanê Min - بڕۆ سەرەکی">
-                <i class="fas fa-globe" aria-hidden="true"></i>
+            <a href="/" class="logo">
+                <i class="fas fa-language"></i>
                 <span class="logo-text">Zimanê Min</span>
-            </div>
+            </a>
             
-            <div class="language-selector">
-                <label for="uiLanguage" class="sr-only">زمانی وێبسایت هەلبژێرە</label>
-                <i class="fas fa-language" aria-hidden="true"></i>
-                <select id="uiLanguage" onchange="changeUILanguage(this.value)" aria-label="زمانی وێبسایت">
-                    <option value="ku-BHD">🇹🇯 کوردی بەهدینی</option>
-                    <option value="ku-SOR">🇹🇯 کوردی سۆرانی</option>
-                    <option value="en">🇬🇧 English</option>
-                    <option value="ar">🇸🇦 العربية</option>
-                    <option value="tr">🇹🇷 Türkçe</option>
-                    <option value="fa">🇮🇷 فارسی</option>
-                    <option value="de">🇩🇪 Deutsch</option>
-                    <option value="fr">🇫🇷 Français</option>
-                    <option value="es">🇪🇸 Español</option>
-                    <option value="zh">🇨🇳 中文</option>
-                </select>
-            </div>
-            
-            <nav class="main-nav" id="mainNav" role="navigation" aria-label="ناڤیگەیشنا سەرەکی">
-                <a href="#dashboard" data-translate="dashboard"><i class="fas fa-th-large" aria-hidden="true"></i> داشبۆرد</a>
-                <a href="#courses" data-translate="courses"><i class="fas fa-book" aria-hidden="true"></i> کورس</a>
-                <a href="#" onclick="openAIChat()" data-translate="ai_chat"><i class="fas fa-robot" aria-hidden="true"></i> AI</a>
-                <a href="#" onclick="openFlashcards('deck_ku_bhd_1')" data-translate="flashcards"><i class="fas fa-clone" aria-hidden="true"></i> فلاش کارت</a>
-                <a href="#" onclick="openSpeechPractice()" data-translate="speech"><i class="fas fa-microphone" aria-hidden="true"></i> ئاخفتن</a>
-                <a href="#" onclick="openLeaderboard()" data-translate="leaderboard"><i class="fas fa-trophy" aria-hidden="true"></i> لیدەربۆرد</a>
-                <a href="#pricing" data-translate="pricing"><i class="fas fa-crown" aria-hidden="true"></i> پلان</a>
-                <a href="#community" data-translate="community"><i class="fas fa-users" aria-hidden="true"></i> کۆمەڵگەه</a>
-                
-                <div class="notification-btn" onclick="toggleNotifications()" role="button" tabindex="0" aria-label="ئاگەهداری">
-                    <i class="fas fa-bell" id="notificationBell" aria-hidden="true"></i>
-                    <span class="notification-badge" id="notificationBadge" style="display:none;">0</span>
-                    <div class="notifications-dropdown" id="notificationsDropdown" onclick="event.stopPropagation()">
-                        <div class="notifications-header">
-                            <h3 data-translate="notification">ئاگەهداری</h3>
-                            <button class="btn btn-sm" onclick="markAllNotificationsRead(); event.stopPropagation();" data-translate="mark_all_read">هەمیان بخوینە</button>
-                        </div>
-                        <div class="notifications-list" id="notificationsList"></div>
-                    </div>
-                </div>
-                
-                <div class="auth-buttons" id="authButtons">
-                    <button class="btn btn-outline" onclick="showLoginForm()" data-translate="login"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> چوونەژوور</button>
-                    <button class="btn btn-primary" onclick="showRegisterForm()" data-translate="register"><i class="fas fa-user-plus" aria-hidden="true"></i> خۆتۆمارکرن</button>
-                </div>
-                
-                <div class="user-menu" id="userMenu" style="display:none;">
-                    <div class="user-avatar" onclick="toggleUserDropdown()" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle" aria-hidden="true"></i>
-                        <span id="userNameDisplay">بکارهێنەر</span>
-                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                    </div>
-                    <div class="dropdown-menu" id="userDropdown" role="menu">
-                        <a href="#dashboard" role="menuitem"><i class="fas fa-th-large" aria-hidden="true"></i> داشبۆرد</a>
-                        <a href="#" onclick="openProfile()" role="menuitem" data-translate="my_profile"><i class="fas fa-user" aria-hidden="true"></i> پڕۆفایلێ من</a>
-                        <a href="#" onclick="openReport()" role="menuitem" data-translate="my_report"><i class="fas fa-chart-bar" aria-hidden="true"></i> راپۆرتا من</a>
-                        <a href="#" onclick="openLeaderboard()" role="menuitem"><i class="fas fa-trophy" aria-hidden="true"></i> لیدەربۆرد</a>
-                        <a href="#" onclick="openPartnerFinder()" role="menuitem" data-translate="partner"><i class="fas fa-user-friends" aria-hidden="true"></i> هەڤالکا فێربوونێ</a>
-                        <a href="#" onclick="showActivationModal()" role="menuitem"><i class="fas fa-key" aria-hidden="true"></i> ئەکتیڤکرن</a>
-                        <a href="#" onclick="exportSystem.showExportPanel()" role="menuitem" data-translate="export"><i class="fas fa-download" aria-hidden="true"></i> ئێکسپۆرت</a>
-                        <a href="#" onclick="openBackupPanel()" role="menuitem" data-translate="backup"><i class="fas fa-database" aria-hidden="true"></i> بەکئەپ</a>
-                        <hr>
-                        <a href="#" onclick="logout()" role="menuitem" data-translate="logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> دەرچوون</a>
-                    </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="#courses"><i class="fas fa-book"></i> <span>کۆرس دابەشکراون</span></a>
+                <a href="#pricing"><i class="fas fa-tags"></i> <span>پلان و نرخ</span></a>
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="appLangSelect">
+                        <option value="ku">بادینی</option>
+                        <option value="ckb">سۆرانی</option>
+                    </select>
                 </div>
             </nav>
             
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="مەنو" aria-expanded="false">
-                <i class="fas fa-bars" aria-hidden="true"></i>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <main id="mainContent" role="main">
-        <!-- Dashboard -->
-        <section id="dashboard" class="section" aria-labelledby="dashboardTitle">
-            <div class="container">
-                <h2 id="dashboardTitle" class="sr-only">داشبۆرد</h2>
-                <!-- ناڤەڕۆکا داشبۆردێ -->
+    <main class="container">
+        <!-- وێلکەم بانەر و پێشوازیکرن -->
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1>بناخێ پاشەڕۆژا خۆ ئاوا بکە 🌍</h1>
+                <p>فێربوونا ١0 زمانێن جیهانی ب ڕێکێن مۆدێرن و ژیریا دەستکرد.</p>
+            </div>
+            <div class="streak-badge">
+                <i class="fas fa-fire"></i>
+                <span id="userStreak">0</span>
+                <p>ڕۆژێن بەردەوامبوونێ</p>
+            </div>
+        </section>
+
+        <!-- ستاتیک و دەستکەفتێن لۆکاڵ -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-graduation-cap text-purple"></i>
+                <div class="stat-info">
+                    <h3 id="statLessons">0</h3>
+                    <p>وانەیێن تەمامبووی</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-award text-yellow"></i>
+                <div class="stat-info">
+                    <h3 id="statPoints">0</h3>
+                    <p>خاڵێن کۆمکری (XP)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بەشێ کۆرسان (Courses Section) -->
+        <section id="courses" class="section">
+            <h2>زمانێن بەردەست</h2>
+            <div class="language-grid" id="coursesContainer">
+                <!-- زمان ب داینامیکی ل ڤێرێ ژ لایێ سکریپتان ڤە دێ بار بن -->
+            </div>
+        </section>
+
+        <!-- بەشێ نرخ و پلانان (Pricing Section) -->
+        <section id="pricing" class="section">
+            <h2>پلانێن بەشداربوونێ</h2>
+            <div class="pricing-grid">
+                <!-- پلانا فڕی -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>ئاستێ سادە</h3>
+                        <div class="price">0$<span>/هەمیشەیی</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> دەستپێشخەری بۆ ٢ زمانان</li>
+                        <li><i class="fas fa-check"></i> تاقیکردنەوەی ئاستی سادە</li>
+                        <li><i class="fas fa-times"></i> ئۆفلاین کارکرن نینە</li>
+                    </ul>
+                    <button class="btn btn-outline btn-block">بەردەوامبە</button>
+                </div>
+                <!-- پلانا پرێمیۆم -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">پێشنیارکری</div>
+                    <div class="pricing-header">
+                        <h3>زێڕین (Premium)</h3>
+                        <div class="price">15$<span>/مانگانە</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> دەستگەیشتن ب هەمی زمانان</li>
+                        <li><i class="fas fa-check"></i> سیستەمێ ئۆفلاین و PWA</li>
+                        <li><i class="fas fa-check"></i> پشتگیری ژیریا دەستکرد AI</li>
+                    </ul>
+                    <button class="btn btn-primary btn-block" onclick="openPaymentModal('premium')">تەڤلیبە</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="main-footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-globe" aria-hidden="true"></i>
-                    <span>Zimanê Min</span>
-                </div>
-                <p>&copy; 2026 Zimanê Min. هەمی ماف پاراستینە.</p>
-                <div class="footer-links">
-                    <a href="#" aria-label="Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a>
-                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                </div>
+    <!-- فوترێ دویماهییێ -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-language"></i> © 2026 Zimanê Min
+            </div>
+            <div class="footer-links">
+                <a href="login.html" title="پەنەلا ئادمینێ"><i class="fas fa-user-shield"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== SCRIPTS (defer) ==================== -->
-    <script defer src="scripts/config.js"></script>
-    <script defer src="scripts/translations.js"></script>
-    <script defer src="scripts/courses.js"></script>
-    <script defer src="scripts/auth.js"></script>
-    <script defer src="scripts/license.js"></script>
-    <script defer src="scripts/payment.js"></script>
-    <script defer src="scripts/gamification.js"></script>
-    <script defer src="scripts/ai-chat.js"></script>
-    <script defer src="scripts/flashcards.js"></script>
-    <script defer src="scripts/speech.js"></script>
-    <script defer src="scripts/lessons.js"></script>
-    <script defer src="scripts/reports.js"></script>
-    <script defer src="scripts/notifications.js"></script>
-    <script defer src="scripts/profile.js"></script>
-    <script defer src="scripts/premium.js"></script>
-    <script defer src="scripts/backup.js"></script>
-    <script defer src="scripts/leaderboard.js"></script>
-    <script defer src="scripts/partners.js"></script>
-    <script defer src="scripts/export.js"></script>
-    <script defer src="scripts/app.js"></script>
-    
-    <!-- Service Worker -->
+    <!-- ============================================
+         ڕێزبەندیا دروستا بارکرنا سکریپتێن پڕۆژەی
+         ============================================ -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/courses.js"></script>
+    <script src="scripts/gamification.js"></script>
+    <script src="scripts/lesson-page.js"></script>
+    <script src="scripts/partners.js"></script>
+    <script src="scripts/backup.js"></script>
+    <script src="scripts/reports.js"></script>
+    <script src="scripts/exports.js"></script>
+    <script src="license.js"></script>
+
+    <!-- سکریپتا سێرڤیس وۆرکەر و کۆنترۆڵکرنا لۆدینگێ -->
     <script>
+        // لۆدینگ سکرین لادە کاتێ لاپەڕە تەمام بار بوو
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loadingScreen');
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        });
+
+        // کارپێکرنا سێرڤیس وۆرکەر (PWA)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
-                    .then(reg => console.log('SW registered:', reg.scope))
-                    .catch(err => console.log('SW failed:', err));
+                    .then(reg => console.log('✅ Service Worker Active:', reg.scope))
+                    .catch(err => console.error('❌ Service Worker Error:', err));
             });
+        }
+
+        // مۆبایل مێنو پۆپئەپ
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('mobile-open');
         }
     </script>
 </body>
