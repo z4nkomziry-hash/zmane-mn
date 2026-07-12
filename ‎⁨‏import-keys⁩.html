@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زێدەکرنا کلیلا</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a2e; color: white; padding: 1rem; margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .box { background: #16213e; padding: 2rem; border-radius: 16px; width: 100%; max-width: 450px; text-align: center; }
+        h1 { color: #e94560; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        p { color: #aaa; margin-bottom: 1.5rem; }
+        button { width: 100%; padding: 1.2rem; background: #e94560; color: white; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin: 0.5rem 0; }
+        button:active { background: #c23152; }
+        .green { background: #10b981 !important; }
+        .count { font-size: 3rem; font-weight: 800; color: #e94560; }
+        .info { background: #0f3460; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🔑 زێدەکرنا ٧٥ کلیلا</h1>
+        <p>کلیک بکە بو داخستنا کلیلا د سیستەمێدا</p>
+        
+        <div class="info">
+            <p>📦 هەمی کلیلا: <span class="count" id="totalKeys">0</span></p>
+            <p id="statusText">ئامادەیە</p>
+        </div>
+        
+        <button onclick="importKeys()" id="btn">📥 ٧٥ کلیلا داخیل بکە</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function importKeys() {
+            const keys = [
+                {key:"ZM-PR1A-B2C3-D4E5-F6G7",pkg:"premium",dur:"1"},
+                {key:"ZM-PR2H-I8J9-K0L1-M2N3",pkg:"premium",dur:"1"},
+                {key:"ZM-PR3O-P4Q5-R6S7-T8U9",pkg:"premium",dur:"1"},
+                {key:"ZM-PR4V-W0X1-Y2Z3-A4B5",pkg:"premium",dur:"1"},
+                {key:"ZM-PR5C-D6E7-F8G9-H0I1",pkg:"premium",dur:"1"},
+                {key:"ZM-PR6J-K2L3-M4N5-O6P7",pkg:"premium",dur:"1"},
+                {key:"ZM-PR7Q-R8S9-T0U1-V2W3",pkg:"premium",dur:"1"},
+                {key:"ZM-PR8X-Y4Z5-A6B7-C8D9",pkg:"premium",dur:"1"},
+                {key:"ZM-PR9E-F0G1-H2I3-J4K5",pkg:"premium",dur:"1"},
+                {key:"ZM-PR0L-M6N7-O8P9-Q0R1",pkg:"premium",dur:"1"},
+                {key:"ZM-PRA-S2T3-U4V5-W6X7",pkg:"premium",dur:"1"},
+                {key:"ZM-PRB-Y8Z9-A0B1-C2D3",pkg:"premium",dur:"1"},
+                {key:"ZM-PRC-E4F5-G6H7-I8J9",pkg:"premium",dur:"1"},
+                {key:"ZM-PRD-K0L1-M2N3-O4P5",pkg:"premium",dur:"1"},
+                {key:"ZM-PRE-Q6R7-S8T9-U0V1",pkg:"premium",dur:"1"},
+                {key:"ZM-PRF-W2X3-Y4Z5-A6B7",pkg:"premium",dur:"1"},
+                {key:"ZM-PRG-C8D9-E0F1-G2H3",pkg:"premium",dur:"1"},
+                {key:"ZM-PRH-I4J5-K6L7-M8N9",pkg:"premium",dur:"1"},
+                {key:"ZM-PRI-O0P1-Q2R3-S4T5",pkg:"premium",dur:"1"},
+                {key:"ZM-PRJ-U6V7-W8X9-Y0Z1",pkg:"premium",dur:"1"},
+                {key:"ZM-PRK-A2B3-C4D5-E6F7",pkg:"premium",dur:"1"},
+                {key:"ZM-PRL-G8H9-I0J1-K2L3",pkg:"premium",dur:"1"},
+                {key:"ZM-PRM-M4N5-O6P7-Q8R9",pkg:"premium",dur:"1"},
+                {key:"ZM-PRN-S0T1-U2V3-W4X5",pkg:"premium",dur:"1"},
+                {key:"ZM-PRO-Y6Z7-A8B9-C0D1",pkg:"premium",dur:"1"},
+                {key:"ZM-FM1A-B2C3-D4E5-F6G7",pkg:"family",dur:"3"},
+                {key:"ZM-FM2H-I8J9-K0L1-M2N3",pkg:"family",dur:"3"},
+                {key:"ZM-FM3O-P4Q5-R6S7-T8U9",pkg:"family",dur:"3"},
+                {key:"ZM-FM4V-W0X1-Y2Z3-A4B5",pkg:"family",dur:"3"},
+                {key:"ZM-FM5C-D6E7-F8G9-H0I1",pkg:"family",dur:"3"},
+                {key:"ZM-FM6J-K2L3-M4N5-O6P7",pkg:"family",dur:"3"},
+                {key:"ZM-FM7Q-R8S9-T0U1-V2W3",pkg:"family",dur:"3"},
+                {key:"ZM-FM8X-Y4Z5-A6B7-C8D9",pkg:"family",dur:"3"},
+                {key:"ZM-FM9E-F0G1-H2I3-J4K5",pkg:"family",dur:"3"},
+                {key:"ZM-FM0L-M6N7-O8P9-Q0R1",pkg:"family",dur:"3"},
+                {key:"ZM-FMA-S2T3-U4V5-W6X7",pkg:"family",dur:"3"},
+                {key:"ZM-FMB-Y8Z9-A0B1-C2D3",pkg:"family",dur:"3"},
+                {key:"ZM-FMC-E4F5-G6H7-I8J9",pkg:"family",dur:"3"},
+                {key:"ZM-FMD-K0L1-M2N3-O4P5",pkg:"family",dur:"3"},
+                {key:"ZM-FME-Q6R7-S8T9-U0V1",pkg:"family",dur:"3"},
+                {key:"ZM-FMF-W2X3-Y4Z5-A6B7",pkg:"family",dur:"3"},
+                {key:"ZM-FMG-C8D9-E0F1-G2H3",pkg:"family",dur:"3"},
+                {key:"ZM-FMH-I4J5-K6L7-M8N9",pkg:"family",dur:"3"},
+                {key:"ZM-FMI-O0P1-Q2R3-S4T5",pkg:"family",dur:"3"},
+                {key:"ZM-FMJ-U6V7-W8X9-Y0Z1",pkg:"family",dur:"3"},
+                {key:"ZM-FMK-A2B3-C4D5-E6F7",pkg:"family",dur:"3"},
+                {key:"ZM-FML-G8H9-I0J1-K2L3",pkg:"family",dur:"3"},
+                {key:"ZM-FMM-M4N5-O6P7-Q8R9",pkg:"family",dur:"3"},
+                {key:"ZM-FMN-S0T1-U2V3-W4X5",pkg:"family",dur:"3"},
+                {key:"ZM-FMO-Y6Z7-A8B9-C0D1",pkg:"family",dur:"3"},
+                {key:"ZM-LT1A-B2C3-D4E5-F6G7",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT2H-I8J9-K0L1-M2N3",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT3O-P4Q5-R6S7-T8U9",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT4V-W0X1-Y2Z3-A4B5",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT5C-D6E7-F8G9-H0I1",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT6J-K2L3-M4N5-O6P7",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT7Q-R8S9-T0U1-V2W3",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT8X-Y4Z5-A6B7-C8D9",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT9E-F0G1-H2I3-J4K5",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LT0L-M6N7-O8P9-Q0R1",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTA-S2T3-U4V5-W6X7",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTB-Y8Z9-A0B1-C2D3",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTC-E4F5-G6H7-I8J9",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTD-K0L1-M2N3-O4P5",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTE-Q6R7-S8T9-U0V1",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTF-W2X3-Y4Z5-A6B7",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTG-C8D9-E0F1-G2H3",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTH-I4J5-K6L7-M8N9",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTI-O0P1-Q2R3-S4T5",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTJ-U6V7-W8X9-Y0Z1",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTK-A2B3-C4D5-E6F7",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTL-G8H9-I0J1-K2L3",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTM-M4N5-O6P7-Q8R9",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTN-S0T1-U2V3-W4X5",pkg:"lifetime",dur:"lifetime"},
+                {key:"ZM-LTO-Y6Z7-A8B9-C0D1",pkg:"lifetime",dur:"lifetime"}
+            ];
+            
+            const old = JSON.parse(localStorage.getItem('licenses') || '[]');
+            const add = keys.map(k => ({key:k.key, package:k.pkg, duration:k.dur, created:new Date().toISOString(), activated:false, activatedBy:null, activatedAt:null, valid:true}));
+            const all = [...old, ...add];
+            
+            localStorage.setItem('licenses', JSON.stringify(all));
+            localStorage.setItem('adminLicenses', JSON.stringify(all));
+            
+            document.getElementById('totalKeys').textContent = all.length;
+            document.getElementById('statusText').textContent = '✅ هاتە زێدەکرن!';
+            document.getElementById('btn').className = 'green';
+            document.getElementById('btn').textContent = '✅ ب سەرکەفتیانە!';
+            document.getElementById('result').innerHTML = '<div style="background:#065f46; padding:1rem; border-radius:8px; margin-top:1rem; color:white;">🎉 ٧٥ کود هاتنە زێدەکرن!<br>💎 پرێمیۆم: ٢٥ | 👨‍👩‍👧‍👦 خێزان: ٢٥ | ♾️ هەروهەر: ٢٥</div>';
+        }
+        
+        // نیشاندانا ژمارا کلیلا
+        const current = JSON.parse(localStorage.getItem('licenses') || '[]');
+        document.getElementById('totalKeys').textContent = current.length;
+        if(current.length > 0) document.getElementById('statusText').textContent = '✅ کلیلا هەنە';
+    </script>
+</body>
+</html>

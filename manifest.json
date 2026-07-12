@@ -1,0 +1,30 @@
+{
+    "name": "Zimanê Min - فێربوونا زمانان",
+    "short_name": "Zimanê Min",
+    "description": "فێربوونا ١٠ زمانان ب تەکنیکێت جیاواز و ژیریا دەستکرد (AI)",
+    "start_url": "/",
+    "display": "standalone",
+    "display_override": ["standalone", "fullscreen"],
+    "background_color": "#ffffff",
+    "theme_color": "#6366f1",
+    "orientation": "any",
+    "lang": "ku",
+    "dir": "rtl",
+    "categories": ["education", "languages"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "prefer_related_applications": false
+}
